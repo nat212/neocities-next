@@ -1,0 +1,23 @@
+$scroller-colour: hotpink;
+$scroller-background: rgba(teal, 0.2);
+
+// The virgin webkit
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: $scroller-background;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: $scroller-colour;
+    border-radius: 20px;
+}
+
+// The chad Firefox
+body {
+    scrollbar-width: thin;
+    scrollbar-color: $scroller-colour $scroller-background;
+}

@@ -1,0 +1,9 @@
+.idea/
+.husky/
+node_modules/
+public/
+.editorconfig
+next-env.d.ts
+README.md
+package.json
+yarn.lock

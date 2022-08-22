@@ -1,0 +1,10 @@
+.heading {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+
+    .title {
+        margin: 0 1rem;
+    }
+}

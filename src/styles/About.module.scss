@@ -1,0 +1,48 @@
+.intro {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    > :first-child {
+        margin-right: 2rem;
+        flex: 1 0 auto;
+    }
+}
+
+.linksTable {
+    margin: 16px auto;
+    background-color: rgba(turquoise, 0.5);
+    border-spacing: 0;
+    border-radius: 8px;
+    border: 1px solid teal;
+    overflow: hidden;
+
+    tr {
+        cursor: pointer;
+    }
+
+    tr:hover {
+        background-color: rgba(turquoise, 0.8);
+    }
+
+    td {
+        padding: 8px;
+        border: none;
+
+        i {
+            font-size: 0.75em;
+            color: black;
+        }
+
+        a {
+            font-family: 'virale', monospace;
+            font-size: 1.25rem;
+            color: purple;
+            text-decoration: none;
+        }
+    }
+}
+
+.discord {
+    color: rebeccapurple;
+}
