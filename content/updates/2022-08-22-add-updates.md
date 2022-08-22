@@ -8,3 +8,4 @@ date: '2022-08-22'
 -   A couple minor style updates.
 -   Learnt about Next.js context. Still kinda figuring things out.
 -   Added a time ticker for fun!
+-   Added a link to the source code.

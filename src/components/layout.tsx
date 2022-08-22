@@ -132,7 +132,17 @@ const Layout: NextPage<LayoutProps> = ({ pageTitle, children }) => {
                         ))}
                     </nav>
                 </section>
-                <footer className={styles.footer}></footer>
+                <footer className={styles.footer}>
+                    <a
+                        className={styles.sourceLink}
+                        href="https://github.com/nat212/neocities-next"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <i className="fa-brands fa-github"></i>
+                        View Source
+                    </a>
+                </footer>
             </div>
         </>
     );

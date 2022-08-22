@@ -4,9 +4,9 @@
     grid-template-rows: 100px 600px 100px;
     grid-template-columns: auto 200px 800px 200px auto;
     grid-template-areas:
-        '. header header header .'
+        '. . header . .'
         '. left main right .'
-        '. footer footer footer .';
+        '. . footer . .';
 
     width: 100%;
     height: 100%;
@@ -120,4 +120,14 @@
 }
 
 .footer {
+    grid-area: footer;
+
+    .sourceLink {
+        > i {
+            margin-right: 0.5rem;
+        }
+
+        color: rebeccapurple;
+        float: right;
+    }
 }
