@@ -2,6 +2,7 @@
     padding: 0.5em;
     background-color: azure;
     border: 1px solid hotpink;
+    margin: 1rem 4rem 0;
 }
 .statuscafeUsername {
     margin-bottom: 0.5em;
@@ -27,4 +28,7 @@
     flex-flow: row wrap;
     justify-content: space-around;
     align-items: center;
+}
+
+.updates {
 }

@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import Layout from '@components/layout';
 import PageHeader from '@components/page-header';
 import rainbowbfly from '@public/images/rainbowbfly.gif';
@@ -9,6 +9,12 @@ import blinky_38 from '@public/blinkies/blinky_38.gif';
 import cat from '@public/blinkies/cat.gif';
 import styles from '@styles/Home.module.scss';
 import { useEffect, useState } from 'react';
+import { getSortedUpdatesData, UpdateMetadata } from '@lib/updates';
+import Link from 'next/link';
+
+interface HomeProps {
+    updates: UpdateMetadata[];
+}
 
 interface Blinky {
     alt: string;
@@ -26,7 +32,7 @@ const getStatus = async (): Promise<Status> => {
     return fetch('https://status.cafe/users/natash/status.json').then((res) => res.json());
 };
 
-const Home: NextPage = () => {
+const Home: NextPage<HomeProps> = ({ updates }) => {
     const blinkies: Blinky[] = [
         { alt: 'trans rights', src: trnsrits },
         { alt: 'no place like my bed', src: bed },
@@ -57,7 +63,7 @@ const Home: NextPage = () => {
                 ))}
             </div>
             <hr />
-            <h5>Current Status</h5>
+            <PageHeader title="Current Status" />
             <div className={styles.statuscafe}>
                 {status.content ? (
                     <>
@@ -67,14 +73,38 @@ const Home: NextPage = () => {
                             </a>{' '}
                             {status.face} {status.timeAgo}
                         </div>
-                        <div className={styles.statuscafeContent}>{status.content}</div>
+                        <div
+                            className={styles.statuscafeContent}
+                            dangerouslySetInnerHTML={{ __html: status.content }}
+                        ></div>
                     </>
                 ) : (
                     <span>Loading status...</span>
                 )}
             </div>
+            <hr />
+            <PageHeader title="Updates" />
+            <ul className={styles.updates}>
+                {updates.map((update) => (
+                    <li key={update.id}>
+                        <Link href={`/updates/${update.id}`}>
+                            <a>{update.title}</a>
+                        </Link>{' '}
+                        - <time dateTime={update.date}>{update.date}</time>
+                    </li>
+                ))}
+            </ul>
         </Layout>
     );
+};
+
+export const getStaticProps: GetStaticProps<HomeProps> = () => {
+    const updates = getSortedUpdatesData();
+    return {
+        props: {
+            updates,
+        },
+    };
 };
 
 export default Home;

@@ -2,12 +2,13 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import { ReactNode, useEffect, useState } from 'react';
 import styles from '@styles/Layout.module.scss';
-import quotes from '@data/quotes.json';
 import chibi from '@public/images/chibi.png';
 import Image, { ImageLoader } from 'next/image';
 import Link from 'next/link';
 import rainbow from '@public/images/rainbowsmall.gif';
 import earth from '@public/images/color_earth.gif';
+import { refreshQuote } from '@lib/quotes';
+import { useQuote } from '@components/quote-provider';
 
 interface LayoutProps {
     pageTitle?: string;
@@ -19,26 +20,11 @@ interface NavbarLink {
     path: string;
 }
 
-const generateNewIndex = (allowSame: boolean, currentQuote: string | null = null): number => {
-    const currIndex = currentQuote ? quotes.indexOf(currentQuote) : -1;
-    const generateIndex = () => Math.floor(Math.random() * quotes.length);
-    let newIndex;
-    do {
-        newIndex = generateIndex();
-    } while (newIndex === currIndex && !allowSame);
-    return newIndex;
-};
-
-const refreshQuote = (allowSame = false, currentQuote: string | null = null): string => {
-    return quotes[generateNewIndex(allowSame, currentQuote)];
-};
-
 const Layout: NextPage<LayoutProps> = ({ pageTitle, children }) => {
-    const [quote, setQuote] = useState(quotes[0]);
     const [hitsImgUrl, setHitsImgUrl] = useState('');
+    const { quote, setQuote } = useQuote();
 
     useEffect(() => {
-        setQuote(refreshQuote());
         setHitsImgUrl(window.location.hostname);
     }, []);
 
@@ -62,8 +48,6 @@ const Layout: NextPage<LayoutProps> = ({ pageTitle, children }) => {
         { label: "Games I've made", path: '/games' },
         { label: 'Credits', path: '/credits' },
     ];
-
-    setInterval(handleQuoteClick, 60 * 1000);
     return (
         <>
             <Head>
@@ -115,20 +99,24 @@ const Layout: NextPage<LayoutProps> = ({ pageTitle, children }) => {
                             />
                         </a>
                         <span className={styles.deetsLabel}>Site Hits</span>
-                        <a
-                            href="https://www.websiteout.net/counter.php"
-                            target="_blank"
-                            rel="noreferrer"
-                            className={styles.hitCounter}
-                        >
-                            <Image
-                                loader={counterLoader}
-                                height={10}
-                                width={49}
-                                src={hitsImgUrl}
-                                alt="web hit counter"
-                            />
-                        </a>
+                        {hitsImgUrl ? (
+                            <a
+                                href="https://www.websiteout.net/counter.php"
+                                target="_blank"
+                                rel="noreferrer"
+                                className={styles.hitCounter}
+                            >
+                                <Image
+                                    loader={counterLoader}
+                                    height={10}
+                                    width={49}
+                                    src={hitsImgUrl}
+                                    alt="web hit counter"
+                                />
+                            </a>
+                        ) : (
+                            <></>
+                        )}
                     </div>
                 </section>
                 <main className={styles.main}>{children}</main>

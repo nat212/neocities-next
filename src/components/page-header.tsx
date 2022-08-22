@@ -9,11 +9,13 @@ interface PageHeaderProps {
 
 const PageHeader: NextPage<PageHeaderProps> = ({ title }) => {
     return (
-        <h4 className={styles.heading}>
-            <Image src={heart} alt="bouncing heart" />
-            <span className={styles.title}>{title}</span>
-            <Image src={heart} alt="bouncing heart" />
-        </h4>
+        <>
+            <h4 className={styles.heading}>
+                <Image src={heart} alt="bouncing heart" />
+                <span className={styles.title}>{title}</span>
+                <Image src={heart} alt="bouncing heart" />
+            </h4>
+        </>
     );
 };
 
