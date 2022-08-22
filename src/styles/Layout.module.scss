@@ -96,13 +96,18 @@
 .right {
     grid-area: right;
     padding: 8px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
 
     .navbar {
         background-color: rgba(paleturquoise, 0.5);
+
         a {
             color: rebeccapurple;
             text-transform: lowercase;
         }
+
         border-radius: 12px;
         border: 1px solid teal;
         display: flex;

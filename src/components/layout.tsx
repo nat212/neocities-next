@@ -9,6 +9,7 @@ import rainbow from '@public/images/rainbowsmall.gif';
 import earth from '@public/images/color_earth.gif';
 import { refreshQuote } from '@lib/quotes';
 import { useQuote } from '@components/quote-provider';
+import DateTime from '@components/date-time';
 
 interface LayoutProps {
     pageTitle?: string;
@@ -121,6 +122,8 @@ const Layout: NextPage<LayoutProps> = ({ pageTitle, children }) => {
                 </section>
                 <main className={styles.main}>{children}</main>
                 <section className={styles.right}>
+                    <DateTime />
+                    <hr className="rainbow" />
                     <nav className={styles.navbar}>
                         {navbarLinks.map((link) => (
                             <Link key={link.path} href={link.path}>
