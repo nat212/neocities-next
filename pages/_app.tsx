@@ -6,6 +6,7 @@ import { QuoteProvider } from '@components/quote-provider';
 import { TimeProvider } from '@components/time-provider';
 import { NextPage } from 'next';
 import { ReactNode } from 'react';
+import Layout from '@components/layout';
 
 const Providers: NextPage<{ children: ReactNode }> = ({ children }) => {
     return (
@@ -18,7 +19,9 @@ const Providers: NextPage<{ children: ReactNode }> = ({ children }) => {
 function App({ Component, pageProps }: AppProps) {
     return (
         <Providers>
-            <Component {...pageProps} />
+            <Layout>
+                <Component {...pageProps} />
+            </Layout>
         </Providers>
     );
 }

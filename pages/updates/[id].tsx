@@ -1,4 +1,3 @@
-import Layout from '@components/layout';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { getAllUpdateIds, getUpdateData, UpdateData } from '@lib/updates';
 import PageHeader from '@components/page-header';
@@ -9,7 +8,7 @@ const Post: NextPage<{ updateData: UpdateData }> = ({ updateData }) => {
         window.history.back();
     };
     return (
-        <Layout pageTitle={updateData.title}>
+        <>
             <PageHeader title={updateData.title} />
             <div className={styles.container}>
                 <time className={styles.date} dateTime={updateData.date}>
@@ -20,7 +19,7 @@ const Post: NextPage<{ updateData: UpdateData }> = ({ updateData }) => {
                     go back
                 </button>
             </div>
-        </Layout>
+        </>
     );
 };
 

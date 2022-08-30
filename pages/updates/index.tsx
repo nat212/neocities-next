@@ -1,36 +1,40 @@
 import { GetStaticProps, NextPage } from 'next';
-import Layout from '@components/layout';
 import PageHeader from '@components/page-header';
-import { getSortedUpdatesData, UpdateMetadata } from '@lib/updates';
+import { getSortedUpdatesData, getUpdateData, UpdateData } from '@lib/updates';
 import Link from 'next/link';
 import styles from '@styles/Updates.module.scss';
 
-const Updates: NextPage<{ updates: UpdateMetadata[] }> = ({ updates }) => {
+const Updates: NextPage<{ updates: UpdateData[] }> = ({ updates }) => {
     return (
-        <Layout pageTitle="Updates">
+        <>
             <PageHeader title="Updates!" />
             <Link href="/">
                 <a className={styles.homeLink}>Home</a>
             </Link>
             <ul>
                 {updates.map((update) => (
-                    <li key={update.id}>
-                        <Link href={`/updates/${update.id}`}>
-                            <a>{update.title}</a>
-                        </Link>{' '}
-                        - <time dateTime={update.date}>{update.date}</time>
+                    <li key={update.id} id={update.id}>
+                        <span>{update.title}</span> - <time dateTime={update.date}>{update.date}</time>
+                        <pre
+                            className={styles.updateContent}
+                            dangerouslySetInnerHTML={{ __html: update.contentHtml }}
+                        ></pre>
                     </li>
                 ))}
             </ul>
-        </Layout>
+        </>
     );
 };
 
-export const getStaticProps: GetStaticProps<{ updates: UpdateMetadata[] }> = () => {
+export const getStaticProps: GetStaticProps<{ updates: UpdateData[] }> = async () => {
     const updates = getSortedUpdatesData();
+    const updatesWithData: UpdateData[] = [];
+    for (const update of updates) {
+        updatesWithData.push(await getUpdateData(update.id));
+    }
     return {
         props: {
-            updates,
+            updates: updatesWithData,
         },
     };
 };

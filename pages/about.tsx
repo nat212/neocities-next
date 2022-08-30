@@ -1,5 +1,4 @@
 import { NextPage } from 'next';
-import Layout from '@components/layout';
 import PageHeader from '@components/page-header';
 import styles from '@styles/About.module.scss';
 import face from '@public/images/face.jpeg';
@@ -17,7 +16,7 @@ const About: NextPage = () => {
         { icon: 'fa-brands fa-square-github', url: 'https://github.com/nat212', label: 'GitHub' },
     ];
     return (
-        <Layout pageTitle="About me!">
+        <>
             <PageHeader title="About me!" />
             <div className={styles.intro}>
                 <Avatar src={face} size={200} />
@@ -63,7 +62,7 @@ const About: NextPage = () => {
             <p>
                 You can also find me on Discord at <span className={styles.discord}>Natasha#2578</span>
             </p>
-        </Layout>
+        </>
     );
 };
 

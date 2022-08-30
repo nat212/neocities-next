@@ -32,3 +32,16 @@
 
 .updates {
 }
+
+.lastUpdate {
+    text-align: center;
+
+    > span {
+        color: black;
+    }
+
+    > time {
+        color: teal;
+        text-decoration: underline;
+    }
+}

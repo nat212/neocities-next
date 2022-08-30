@@ -10,6 +10,7 @@ import earth from '@public/images/color_earth.gif';
 import { refreshQuote } from '@lib/quotes';
 import { useQuote } from '@components/quote-provider';
 import DateTime from '@components/date-time';
+import Script from 'next/script';
 
 interface LayoutProps {
     pageTitle?: string;
@@ -131,6 +132,9 @@ const Layout: NextPage<LayoutProps> = ({ pageTitle, children }) => {
                             </Link>
                         ))}
                     </nav>
+                    <hr className="rainbow" />
+                    <div className="yw-widget-full yw-raw" data-yw-url="https://natashadraper.me"></div>
+                    <Script src="https://yesterweb.org/js/widget.js"></Script>
                 </section>
                 <footer className={styles.footer}>
                     <a

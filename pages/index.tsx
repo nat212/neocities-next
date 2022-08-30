@@ -1,5 +1,4 @@
 import type { GetStaticProps, NextPage } from 'next';
-import Layout from '@components/layout';
 import PageHeader from '@components/page-header';
 import rainbowbfly from '@public/images/rainbowbfly.gif';
 import Image, { StaticImageData } from 'next/image';
@@ -11,9 +10,11 @@ import styles from '@styles/Home.module.scss';
 import { useEffect, useState } from 'react';
 import { getSortedUpdatesData, UpdateMetadata } from '@lib/updates';
 import Link from 'next/link';
+import { format as formatDate, parseISO } from 'date-fns';
 
 interface HomeProps {
     updates: UpdateMetadata[];
+    lastUpdate: string;
 }
 
 interface Blinky {
@@ -32,7 +33,7 @@ const getStatus = async (): Promise<Status> => {
     return fetch('https://status.cafe/users/natash/status.json').then((res) => res.json());
 };
 
-const Home: NextPage<HomeProps> = ({ updates }) => {
+const Home: NextPage<HomeProps> = ({ updates, lastUpdate }) => {
     const blinkies: Blinky[] = [
         { alt: 'trans rights', src: trnsrits },
         { alt: 'no place like my bed', src: bed },
@@ -45,7 +46,7 @@ const Home: NextPage<HomeProps> = ({ updates }) => {
         getStatus().then(setStatus);
     }, []);
     return (
-        <Layout>
+        <>
             <PageHeader title="Welcome to my space!" />
             <div className={styles.intro}>
                 <div className={styles.imgWrapper}>
@@ -84,17 +85,21 @@ const Home: NextPage<HomeProps> = ({ updates }) => {
             </div>
             <hr />
             <PageHeader title="Updates" />
+            <p className={styles.lastUpdate}>
+                <span>Last updated: </span>
+                <time dateTime={lastUpdate}>{formatDate(parseISO(lastUpdate), 'HH:mm, dd MMMM yyyy')}</time>
+            </p>
             <ul className={styles.updates}>
                 {updates.map((update) => (
                     <li key={update.id}>
-                        <Link href={`/updates/${update.id}`}>
+                        <Link href={`/updates#${update.id}`}>
                             <a>{update.title}</a>
                         </Link>{' '}
                         - <time dateTime={update.date}>{update.date}</time>
                     </li>
                 ))}
             </ul>
-        </Layout>
+        </>
     );
 };
 
@@ -103,6 +108,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = () => {
     return {
         props: {
             updates,
+            lastUpdate: new Date().toISOString(),
         },
     };
 };

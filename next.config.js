@@ -2,6 +2,7 @@
 const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
+    trailingSlash: false,
     images: {
         domains: ['moods.imood.com', 'counter.websiteout.net'],
         loader: 'akamai',

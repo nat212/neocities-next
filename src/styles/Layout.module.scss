@@ -102,6 +102,8 @@
 
     .navbar {
         background-color: rgba(paleturquoise, 0.5);
+        width: 100%;
+        box-sizing: border-box;
 
         a {
             color: rebeccapurple;

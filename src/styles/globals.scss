@@ -82,3 +82,17 @@ button {
         background-color: #efbbe4;
     }
 }
+
+.yw-widget-full {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+    border-radius: 12px;
+    background-color: rgba(paleturquoise, 0.7);
+    border: 1px solid teal;
+    text-align: center;
+
+    .yw-content {
+        font-size: 0.9em;
+    }
+}

@@ -1,3 +1,14 @@
 .homeLink {
     margin: 0 2.5rem;
 }
+
+.updateContent {
+    width: 100%;
+    word-wrap: break-word;
+    overflow: hidden;
+
+    li {
+        word-wrap: break-word;
+        white-space: normal;
+    }
+}
