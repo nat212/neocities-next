@@ -2,8 +2,7 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import { ReactNode, useEffect, useState } from 'react';
 import styles from '@styles/Layout.module.scss';
-import chibi from '@public/images/chibi.png';
-import Image, { ImageLoader } from 'next/image';
+import chibi from '../../public/images/chibi.png';
 import Link from 'next/link';
 import rainbow from '@public/images/rainbowsmall.gif';
 import earth from '@public/images/color_earth.gif';
@@ -11,6 +10,7 @@ import { refreshQuote } from '@lib/quotes';
 import { useQuote } from '@components/quote-provider';
 import DateTime from '@components/date-time';
 import Script from 'next/script';
+import Image from '@components/image';
 
 interface LayoutProps {
     pageTitle?: string;
@@ -27,19 +27,13 @@ const Layout: NextPage<LayoutProps> = ({ pageTitle, children }) => {
     const { quote, setQuote } = useQuote();
 
     useEffect(() => {
-        setHitsImgUrl(window.location.hostname);
+        setHitsImgUrl(
+            `https://counter.websiteout.net/compte.php?S=${encodeURI(window.location.hostname)}&C=20&D=7&N=0&M=0`,
+        );
     }, []);
 
     const handleQuoteClick = () => {
         setQuote(refreshQuote(false, quote));
-    };
-
-    const counterLoader: ImageLoader = ({ src }) => {
-        return `https://counter.websiteout.net/compte.php?S=${encodeURI(src)}&C=20&D=7&N=0&M=0`;
-    };
-
-    const moodLoader: ImageLoader = ({ src }) => {
-        return `https://moods.imood.com/display/uname-${src}/fg-04573c/trans-1/imood.gif`;
     };
 
     const navbarLinks: NavbarLink[] = [
@@ -93,8 +87,7 @@ const Layout: NextPage<LayoutProps> = ({ pageTitle, children }) => {
                         <span className={styles.deetsLabel}>Mood</span>
                         <a href="https://www.imood.com/users/natash" target="_blank" rel="noreferrer">
                             <Image
-                                loader={moodLoader}
-                                src="natash"
+                                src="https://moods.imood.com/display/uname-natash/fg-04573c/trans-1/imood.gif"
                                 width={54}
                                 height={15}
                                 alt="The current mood of natash at www.imood.com"
@@ -108,13 +101,7 @@ const Layout: NextPage<LayoutProps> = ({ pageTitle, children }) => {
                                 rel="noreferrer"
                                 className={styles.hitCounter}
                             >
-                                <Image
-                                    loader={counterLoader}
-                                    height={10}
-                                    width={49}
-                                    src={hitsImgUrl}
-                                    alt="web hit counter"
-                                />
+                                <Image height={10} width={49} src={hitsImgUrl} alt="web hit counter" />
                             </a>
                         ) : (
                             <></>

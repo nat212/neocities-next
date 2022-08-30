@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
-import Image, { StaticImageData } from 'next/image';
+import { StaticImageData } from 'next/image';
 import styles from '@styles/Avatar.module.scss';
+import Image from '@components/image';
 
 interface AvatarProps {
     size: number;

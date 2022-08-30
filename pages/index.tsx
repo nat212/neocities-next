@@ -1,7 +1,7 @@
 import type { GetStaticProps, NextPage } from 'next';
 import PageHeader from '@components/page-header';
 import rainbowbfly from '@public/images/rainbowbfly.gif';
-import Image, { StaticImageData } from 'next/image';
+import { StaticImageData } from 'next/image';
 import trnsrits from '@public/blinkies/trnsrits.gif';
 import bed from '@public/blinkies/bed.gif';
 import blinky_38 from '@public/blinkies/blinky_38.gif';
@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { getSortedUpdatesData, UpdateMetadata } from '@lib/updates';
 import Link from 'next/link';
 import { format as formatDate, parseISO } from 'date-fns';
+import Image from '@components/image';
 
 interface HomeProps {
     updates: UpdateMetadata[];
@@ -92,7 +93,7 @@ const Home: NextPage<HomeProps> = ({ updates, lastUpdate }) => {
             <ul className={styles.updates}>
                 {updates.map((update) => (
                     <li key={update.id}>
-                        <Link href={`/updates#${update.id}`}>
+                        <Link href={`/updates/${update.id}`}>
                             <a>{update.title}</a>
                         </Link>{' '}
                         - <time dateTime={update.date}>{update.date}</time>

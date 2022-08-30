@@ -2,11 +2,9 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { getAllUpdateIds, getUpdateData, UpdateData } from '@lib/updates';
 import PageHeader from '@components/page-header';
 import styles from '@styles/Update.module.scss';
+import Link from 'next/link';
 
 const Post: NextPage<{ updateData: UpdateData }> = ({ updateData }) => {
-    const onBackClick = () => {
-        window.history.back();
-    };
     return (
         <>
             <PageHeader title={updateData.title} />
@@ -15,9 +13,11 @@ const Post: NextPage<{ updateData: UpdateData }> = ({ updateData }) => {
                     {updateData.date}
                 </time>
                 <div dangerouslySetInnerHTML={{ __html: updateData.contentHtml }} />
-                <button type="button" onClick={onBackClick} className={styles.backButton}>
-                    go back
-                </button>
+                <Link href="/">
+                    <button type="button" className={styles.backButton}>
+                        go home
+                    </button>
+                </Link>
             </div>
         </>
     );

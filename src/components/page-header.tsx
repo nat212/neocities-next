@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import styles from '@styles/PageHeader.module.scss';
-import Image from 'next/image';
+import Image from '@components/image';
 import heart from '@public/images/heart.gif';
 
 interface PageHeaderProps {
