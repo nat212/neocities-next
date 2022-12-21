@@ -7,7 +7,8 @@
         "build": "next build && next export",
         "start": "next start",
         "lint": "next lint",
-        "prepare": "husky install"
+        "prepare": "husky install",
+		"nc:push": "neocities push out"
     },
     "dependencies": {
         "date-fns": "^2.29.2",
@@ -25,7 +26,7 @@
         "eslint": "8.22.0",
         "eslint-config-next": "12.2.5",
         "gray-matter": "^4.0.3",
-        "husky": "^8.0.1",
+        "husky": "^8.0.2",
         "imagemin-gifsicle": "^7.0.0",
         "imagemin-mozjpeg": "^10.0.0",
         "imagemin-optipng": "^8.0.0",
