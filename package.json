@@ -11,7 +11,7 @@
     },
     "dependencies": {
         "date-fns": "^2.29.2",
-        "next": "12.2.5",
+        "next": "^12.2.6-canary.6",
         "next-optimized-images": "^2.6.2",
         "react": "18.2.0",
         "react-dom": "18.2.0",
